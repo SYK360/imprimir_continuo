@@ -1,0 +1,211 @@
+
+<!--
+CAMBIOS REALIZADOS:
+
+SE QUITO LOS INCLUDES DE HEDAER2 Y FOOTER2
+SE AGREGO POSICIONES ABSOLUTAS A LAS TABLAS
+
+->
+{if="$fsc->factura"}
+<!--<script type="text/javascript">
+   $(document).ready(function() {
+      window.print();
+      setTimeout(function () { window.close(); }, 100);
+   });
+</script>  -->
+
+<div style="
+    width: 1160px;
+    height: 990px;    
+    border: 1px solid black ;
+    position: absolute;
+    "
+    >
+ 
+    <table style="font-size: 22px; margin-top: 85px; 
+    margin-bottom: 60px;
+    top: 10px;       
+    position: absolute; ">
+        <tr> 
+
+         <td style="border-top: none;">
+                               
+                    <div style="padding-left:40px;" > 
+                        {$fsc->factura->codagente}                         
+                    </div>              
+            </td>
+          
+        </tr>
+        
+          <tr>
+            <td style=" max-width: 600px;">
+                <div style=" padding-left: 130px; width:595px;">                      
+                         {$fsc->factura->nombrecliente} 
+                    </div>
+
+              
+            </td>      
+       
+        </tr>
+        
+   <tr >
+            <td style=" max-width: 600px;" > 
+               
+                    <div style="padding-left: 95px; width:1075px; " >                        
+                         {$fsc->factura->direccion} 
+                    </div>
+                   
+              
+              
+            </td>     
+
+        </tr>
+        <tr>
+
+          <td style=" max-width: 595px;" >
+                               
+                    <div style="padding-left:70px; width:595px; "> 
+                        {$fsc->factura->fecha}                         
+                    </div>
+              
+            </td>
+
+                 <td>
+                     <div style="padding-right: 250px;">
+                         {$fsc->factura->cifnif}
+                    </div>
+            </td>
+
+                        <td>
+                  <div style="padding-right:0px; width: 300px;">
+                         {$fsc->cliente->telefono1}
+                    </div>
+            </td>
+        </tr>
+    </table>
+    
+    
+ <!--TABLA DE LINEAS-->
+        <table style=" 
+        font-size: 18px;
+        top: 300px; 
+       
+        position: absolute;">
+          
+
+            
+                                  {loop="$fsc->factura->get_lineas()"}
+                                    
+         <tr > 
+             <td >
+                     <div >{$value->cantidad}</div>
+                     </td>
+                     <td >
+                     
+                     <div style="padding-left:115px; width:700px; ">{$value->referencia}... {$value->descripcion}</div>
+                     </td>
+                     <td>
+                     <div style="padding-left:35px; ">{$fsc->show_precio($value->pvpunitario, $fsc->factura->coddivisa)}</div>
+                     </td>
+                     <td>
+                     <div style="padding-left:35px; "">{$fsc->show_precio($value->total_iva(), $fsc->factura->coddivisa)}</div>
+                    
+              </td>   
+               </tr>
+
+                     {/loop}
+       
+ 
+      
+               
+        </table>
+
+<!--TABLA DE OBSERVACIONES-->
+
+ <table style="">
+       <tr>
+       	<td>
+       	
+       		<div style="padding-left:80px; width:200px; font-size: ">{$fsc->factura->observaciones}</div>
+       	</td>
+
+       </tr>
+    </table>
+
+<!--TABLA DE TOTALES-->
+
+        <table style="
+        font-size: 22px;
+        top: 800px; 
+        left: -100px;
+        position: absolute;">
+    
+            <tr> 
+
+             <td>
+                <div style="width:500px;">
+                    
+                    </div>
+                </td> 
+
+             <td>
+                <div style="width:200px;" >
+                    {$fsc->factura->codpago}
+                    </div>
+                </td>
+                </tr>
+
+                <tr> 
+                 <td>
+                <div style="width:800px;">
+                    
+                    </div>
+                </td>    
+                <td>
+                <div style="width:450px; padding-left:310px;">
+                    {$fsc->show_precio($fsc->factura->neto, $fsc->factura->coddivisa)}
+                    </div>
+                </td>
+                </tr>
+                <tr>
+
+                 <td>
+                <div style="width:800px;">
+                    
+                    </div>
+                </td> 
+
+                <td>
+                <div style="width:450px; padding-left:310px; ">
+                  {$fsc->show_precio($fsc->factura->totaliva, $fsc->factura->coddivisa)} 
+                  </div> 
+                </td>
+                </tr>
+                <tr>
+
+                 <td>
+                <div style="width:800px;  ">
+                    
+                    </div>
+                </td> 
+
+             <td>
+             	<div style="width:450px; padding-left:310px; ">
+                 {$fsc->show_precio($fsc->factura->total, $fsc->factura->coddivisa)}
+                  </div>
+                </td>
+            </tr>
+           
+        </table>
+   
+        
+      
+               
+     
+</div>
+{else}
+<div class="thumbnail">
+   <img src="view/img/fuuu_face.png" alt="fuuuuu"/>
+</div>
+{/if}
+
